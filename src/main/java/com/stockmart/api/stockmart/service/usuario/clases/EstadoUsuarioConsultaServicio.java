@@ -5,12 +5,18 @@ import com.stockmart.api.stockmart.repository.usuario.EstadoUsuarioRepositorio;
 import com.stockmart.api.stockmart.service.usuario.interfaces.IEstadoUsuarioConsultaServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional(readOnly = true)
 public class EstadoUsuarioConsultaServicio implements IEstadoUsuarioConsultaServicio {
 
+    private final EstadoUsuarioRepositorio estadoUsuarioRepositorio;
+
     @Autowired
-    private EstadoUsuarioRepositorio estadoUsuarioRepositorio;
+    public EstadoUsuarioConsultaServicio(EstadoUsuarioRepositorio estadoUsuarioRepositorio) {
+        this.estadoUsuarioRepositorio = estadoUsuarioRepositorio;
+    }
 
     @Override
     public EstadoUsuario buscarEstadoUsuarioPorId(Integer idEstadoUsuario) {
@@ -19,6 +25,6 @@ public class EstadoUsuarioConsultaServicio implements IEstadoUsuarioConsultaServ
 
     @Override
     public EstadoUsuario buscarEstadoUsuarioPorNombreEstado(String nombreEstadoUsuario) {
-        return null;
+        return this.estadoUsuarioRepositorio.findByNombre(nombreEstadoUsuario);
     }
 }

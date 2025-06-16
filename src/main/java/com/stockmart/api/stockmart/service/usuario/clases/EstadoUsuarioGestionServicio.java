@@ -4,7 +4,11 @@ import com.stockmart.api.stockmart.entity.usuario.EstadoUsuario;
 import com.stockmart.api.stockmart.repository.usuario.EstadoUsuarioRepositorio;
 import com.stockmart.api.stockmart.service.usuario.interfaces.IEstadoUsuarioGestionServicio;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+@Service
+@Transactional
 public class EstadoUsuarioGestionServicio implements IEstadoUsuarioGestionServicio {
     private final EstadoUsuarioRepositorio estadoUsuarioRepositorio;
 
